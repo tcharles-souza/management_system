@@ -1,0 +1,76 @@
+/* login.css */
+.login-page {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7; /* Alterado para um tom mais suave */
+  }
+  
+  .left-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-right: 1px solid #ccc;
+  }
+  
+  .left-section img {
+    /* Reduzindo o tamanho do logo */
+    max-width: 400px; /* Definindo um tamanho máximo para o logo */
+  }
+  
+  .right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-control {
+    width: 80%; /* Reduzindo a largura do form */
+    max-width: 300px; /* Definindo uma largura máxima para o form */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+  }
+  
+  .register-link {
+    margin-top: 15px;
+  }
+  
+  .register-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  /* Ajuste os estilos conforme necessário */
+  .left-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7; /* Defina a mesma cor de fundo da página */
+    border-right: 1px solid #ccc;
+  }
+  
+  /* ... Outros estilos ... */
+  
+  .right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7; /* Defina a mesma cor de fundo da página */
+    border-left: 1px solid #ccc;
+  }

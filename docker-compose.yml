@@ -1,0 +1,60 @@
+version: "3"
+
+services:
+  backend:
+    build: ./back-end
+    container_name: ms_backend
+    tty: true
+    stdin_open: true
+    restart: always
+    volumes:
+      - ./back-end:/app
+    ports:
+      - 3001:3001
+      - 9229:9229
+    environment:
+      PORT: 3001
+      MYSQL_HOSTNAME: db
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: PadariaDB
+    depends_on:
+      - db
+
+  db:
+    container_name: ms_db
+
+    image: mysql:8.0.32
+
+    restart: always
+
+    ports:
+      - 3306:3306
+
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: PadariaDB
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+
+    volumes:
+      - ./seed.sql:/docker-entrypoint-initdb.d/seed.sql
+
+  frontend:
+    build: ./front-end
+    container_name: ms_frontend
+    tty: true
+    stdin_open: true
+    restart: always
+    volumes:
+      - ./front-end:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - backend
+
+  
+networks:
+  default:
+    name: talker_manager_net

@@ -1,0 +1,162 @@
+fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  height: 200px;
+}
+
+input, label {
+  display: block;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+}
+
+.header_btn {
+  margin: 0px 2px;
+}
+
+th {
+  text-align: center;
+  padding: 0px 30px;
+}
+
+td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 0px 30px;
+}
+
+.b1 {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.amount {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+}
+
+.custom-width {
+  width: 150px;
+}
+
+.td-nome {
+  text-align: left;
+}
+
+.td-cod {
+  width: 50px;
+  text-align: center;
+}
+
+.td-produto {
+  width: 350px;
+  text-align: left;
+}
+
+.td-preco {
+  width: 180px;
+  text-align: center;
+
+}
+
+.td-quantidade {
+  width: 150px;
+  text-align: right;
+}
+
+.td-total {
+  width: 180px;
+  text-align: center;
+}
+
+.td-delete {
+  width: 70px;
+  text-align: left;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f1; /* Cor de fundo do rodapé */
+  padding: 10px;
+}
+
+.cashier-btn {
+  margin-left: 10px; /* Espaçamento do canto esquerdo */
+}
+
+.right-elements {
+  display: flex;
+  gap: 10px; /* Espaçamento entre os elementos da direita */
+  margin-right: 10px; /* Espaçamento do canto direito */
+}
+
+.search-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(241, 236, 236);
+}
+
+.cashier-total {
+  width: 200px;
+  text-align: center;
+}
+
+.cashier-total-text {
+  width: 100px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin: 0 0 60px; /* altura do seu footer */
+}
+
+/* styles.css */
+.sticky-container {
+  position: sticky;
+  top: 0;
+  background-color: #f1f1f1; /* Cor de fundo do elemento de busca */
+  padding: 10px;
+  z-index: 100; /* Opcional: ajuste a ordem de empilhamento se necessário */
+}
+
+/* #search-product {
+  position: fixed;
+} */

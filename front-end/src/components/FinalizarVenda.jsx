@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 import PropTypes from 'prop-types';
+import { createSale, createSaleProduct } from '../services/finalizarVenda_sv';
+import context from '../context/appContext';
 
 function FinalizarVenda({ ...props }) {
   const {
@@ -11,9 +13,18 @@ function FinalizarVenda({ ...props }) {
     cashier,
     fullPrice,
     getTotal,
+    customer,
   } = props;
+
+  const { user } = useContext(context);
+  console.log(user);
   // const [finalSale, setFinalSale] = useState([]);
   const handleClose = () => setShowSale(false);
+
+  const finishEvent = async () => {
+    const { insertId } = await createSale({ customer, user, fullPrice });
+    await createSaleProduct({ insertId, cashier, fullPrice });
+  };
 
   useEffect(() => {
   }, []);
@@ -64,7 +75,7 @@ function FinalizarVenda({ ...props }) {
         <Button variant="secondary" onClick={ handleClose }>
           Cancelar
         </Button>
-        <Button variant="primary" onClick={ handleClose }>
+        <Button variant="primary" onClick={ finishEvent }>
           Concuir
         </Button>
       </Modal.Footer>
@@ -84,6 +95,7 @@ FinalizarVenda.propTypes = {
   ),
   fullPrice: PropTypes.string,
   getTotal: PropTypes.func,
+  customer: PropTypes.string,
 };
 
 export default FinalizarVenda;

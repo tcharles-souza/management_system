@@ -81,7 +81,8 @@ function Caixa() {
 
   useEffect(() => {
     const handleKeyPress = (event) => {
-      if (event.key === 'Enter') {
+      console.log(event.key);
+      if (event.key === 'F9' && cashier.length) {
         setShowSale(true);
       }
     };
@@ -91,10 +92,10 @@ function Caixa() {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, []);
+  }, [cashier]);
 
   const getTotal = (a, b) => (Number(a) * Number(b)).toFixed(2);
-  console.log(cashier);
+
   return (
     <div>
       <Form.Control
@@ -170,7 +171,7 @@ function Caixa() {
             style={ { marginLeft: '5px' } }
             disabled={ !cashier.length }
           >
-            FINALIZAR VENDA
+            FINALIZAR VENDA F9
           </Button>
 
           <FinalizarVenda
@@ -179,6 +180,7 @@ function Caixa() {
             cashier={ cashier }
             fullPrice={ fullPrice }
             getTotal={ getTotal }
+            customer={ choseCostumer }
           />
 
           <button

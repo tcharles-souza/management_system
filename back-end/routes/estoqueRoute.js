@@ -1,18 +1,18 @@
+/* eslint-disable camelcase */
 const express = require('express');
 
 const { 
   selectAll, 
-  insertSupplier, 
-  deleteSupplier, 
-  updateSupplier,
- } = require('../db/queries/fornecedores_sql');
+  insertProduct, 
+  deleteProduct, 
+  updateProduct } = require('../models/estoque_sql');
 
 const router = express.Router();
 
 router.get('/', async (_req, res) => {
   try {
     const [data] = await selectAll();
-    res.status(201).json(data);
+    res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -20,10 +20,9 @@ router.get('/', async (_req, res) => {
 
 router.post('/', async (req, res) => {
   const data = req.body;
-
   try {
-  await insertSupplier(data);
-  res.status(201).json(data);
+    await insertProduct(data);
+    res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -31,22 +30,19 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
-
   try {
-  await deleteSupplier(id);
-  res.sendStatus(204);
-} catch (error) {
-  res.status(500).json({ message: error.message });
-}
+    await deleteProduct(id);
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/', async (req, res) => {
   const data = req.body;
-  const { id } = req.params;
-
   try {
-    await updateSupplier(data, Number(id));
-    res.sendStatus(204);
+    await updateProduct(data);
+    res.status(201).json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -53,8 +53,10 @@ function ListaClientes({ ...props }) {
         >
           {
             customers.length && customers
-              .filter(({ id, nome }) => nome.toLowerCase()
-                .includes(filter.toLowerCase()) || id.toString().includes(filter))
+              .filter(({ id, nome, sobrenome }) => `${nome
+                .toLowerCase()} ${sobrenome.toLowerCase()}`
+                .includes(filter.toLocaleLowerCase())
+                || id.toString().includes(filter))
               .map((c) => (
 
                 <tr

@@ -1,4 +1,4 @@
-const conn = require('../connection');
+const conn = require('../config/connection');
 
 const selectAll = () => conn.execute(
   `SELECT

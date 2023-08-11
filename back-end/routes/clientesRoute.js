@@ -2,7 +2,7 @@ const express = require('express');
 const { selectAll,
   insertCustomer,
   deleteCustomer,
-  updateCustomer } = require('../db/queries/clientes_sql');
+  updateCustomer } = require('../models/clientes_sql');
 
 const router = express.Router();
 

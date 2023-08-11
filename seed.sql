@@ -55,7 +55,7 @@ CREATE TABLE usuarios (
 CREATE TABLE vendas (
   id_venda INT NOT NULL AUTO_INCREMENT,
   data_venda DATETIME NOT NULL,
-  cliente VARCHAR(45) NULL,
+  cliente_id INT NULL,
   vendedor VARCHAR(45) NULL,
   total DECIMAL(10,2) NULL,
   PRIMARY KEY (id_venda));

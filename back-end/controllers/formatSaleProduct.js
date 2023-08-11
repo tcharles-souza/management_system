@@ -1,4 +1,4 @@
-const mapCashier = require('../../utils/map_sales');
+const mapCashier = require('./map_sales');
 
 const formatSaleProduct = (req, _res, next) => {
     const { cashier } = req.body;

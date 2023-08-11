@@ -81,7 +81,6 @@ function Caixa() {
 
   useEffect(() => {
     const handleKeyPress = (event) => {
-      console.log(event.key);
       if (event.key === 'F9' && cashier.length) {
         setShowSale(true);
       }

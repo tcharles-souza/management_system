@@ -1,4 +1,4 @@
-const { selectAll } = require('../../db/queries/usuarios_sql');
+const { selectAll } = require('../models/usuarios_sql');
 
 const loginCheck = async (req, res) => {
   const { username, password } = req.body;

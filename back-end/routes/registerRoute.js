@@ -1,5 +1,5 @@
 const express = require('express');
-const { createNewUser } = require('../db/queries/usuarios_sql');
+const { createNewUser } = require('../models/usuarios_sql');
 
 const router = express.Router();
 

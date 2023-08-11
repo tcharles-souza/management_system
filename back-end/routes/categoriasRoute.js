@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { selectAll } = require('../db/queries/categorias_sql');
+const { selectAll } = require('../models/categorias_sql');
 
 const router = express.Router();
 

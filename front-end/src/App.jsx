@@ -10,6 +10,7 @@ import Clientes from './pages/Clientes';
 import Estoque from './pages/Estoque';
 import Fornecedores from './pages/Fornecedores';
 import AppProvider from './context/AppProvider';
+import Vendas from './pages/Vendas';
 
 function App() {
   const { pathname } = useLocation();
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <Login /> } />
         <Route path="/caixa" element={ <Caixa /> } />
+        <Route path="/vendas" element={ <Vendas /> } />
         <Route path="/clientes" element={ <Clientes /> } />
         <Route path="/estoque" element={ <Estoque /> } />
         <Route path="/fornecedores" element={ <Fornecedores /> } />

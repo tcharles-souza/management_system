@@ -1,4 +1,4 @@
-const conn = require('../connection');
+const conn = require('../config/connection');
 
 const createNewUser = (data) => conn.execute(
   `INSERT INTO usuarios (usuario, senha) 

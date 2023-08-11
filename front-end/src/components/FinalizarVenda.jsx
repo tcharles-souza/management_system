@@ -17,13 +17,12 @@ function FinalizarVenda({ ...props }) {
   } = props;
 
   const { user } = useContext(context);
-  console.log(user);
-  // const [finalSale, setFinalSale] = useState([]);
   const handleClose = () => setShowSale(false);
 
   const finishEvent = async () => {
     const { insertId } = await createSale({ customer, user, fullPrice });
     await createSaleProduct({ insertId, cashier, fullPrice });
+    handleClose();
   };
 
   useEffect(() => {

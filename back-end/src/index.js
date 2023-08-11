@@ -10,6 +10,7 @@ const categoriasRoute = require('./routes/categorias');
 const fornecedoresRoute = require('./routes/fornecedores');
 const registerRoute = require('./routes/register');
 const authentication = require('./routes/authentication');
+const finishSale = require('./routes/finishSale');
 
 app.use(express.json());
 app.use(cors());
@@ -30,5 +31,6 @@ app.use('/estoque', estoqueRoute);
 app.use('/categorias', categoriasRoute);
 app.use('/fornecedores', fornecedoresRoute);
 app.use('/register', registerRoute);
+app.use('/vendas', finishSale);
 
 module.exports = app;

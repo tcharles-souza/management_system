@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import ProdutosCaixa from '../components/ProdutosCaixa';
 import { normalizeText } from '../../utils/normalize_text';
 
 import trash from '../images/trash-2.svg';
+import FinalizarVenda from '../components/FinalizarVenda';
+import ListaClientes from '../components/ListaClientes';
 
 function Caixa() {
   const [products, setProducts] = useState([]);
   const [cashier, setCashier] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
+  const [showSale, setShowSale] = useState(false);
+  const [showCustomers, setShowCustomers] = useState(false);
   const [input, setInput] = useState('');
   const [fullPrice, setFullPrice] = useState(0);
+  const [choseCostumer, setChosenCostumer] = useState(null);
 
   const getProducts = async () => {
     const result = await fetch('http://localhost:3001/estoque');
@@ -70,12 +75,26 @@ function Caixa() {
       (acc, { quantidade: a, preco: b }) => acc + Number(a) * Number(b),
       0,
     );
-    // cashier.forEach((e, i) => console.log(e, i));
+
     setFullPrice(getFullPrice().toFixed(2));
   }, [cashier]);
 
-  const getTotal = (a, b) => (Number(a) * Number(b)).toFixed(2);
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === 'Enter') {
+        setShowSale(true);
+      }
+    };
 
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
+  const getTotal = (a, b) => (Number(a) * Number(b)).toFixed(2);
+  console.log(cashier);
   return (
     <div>
       <Form.Control
@@ -91,11 +110,12 @@ function Caixa() {
       <table className="table table-borderless">
         <thead>
           <tr>
-            <th scope="col">Cód</th>
-            <th scope="col">Produto</th>
-            <th scope="col">Preço</th>
-            <th scope="col">Quantidade</th>
-            <th scope="col">Total</th>
+            <th className="td-cod" scope="col">Cód</th>
+            <th className="td-produto" scope="col">Produto</th>
+            <th className="td-preco" scope="col">Preço</th>
+            <th className="td-quantidade" scope="col">Quantidade</th>
+            <th className="td-total" scope="col">Total</th>
+            <th className="td-delete" scope="col">{' '}</th>
           </tr>
         </thead>
         <tbody>
@@ -135,16 +155,70 @@ function Caixa() {
         </tbody>
       </table>
       <footer>
+        <div className="cashier-btn">
+          <ProdutosCaixa
+            showSearch={ showSearch }
+            setShowSearch={ setShowSearch }
+            products={ products }
+            addProduct={ addProduct }
+            input={ input }
+            setInput={ setInput }
+          />
+          <Button
+            variant="primary"
+            onClick={ () => setShowSale(true) }
+            style={ { marginLeft: '5px' } }
+            disabled={ !cashier.length }
+          >
+            FINALIZAR VENDA
+          </Button>
 
-        <ProdutosCaixa
-          className="cashier-btn"
-          showSearch={ showSearch }
-          setShowSearch={ setShowSearch }
-          products={ products }
-          addProduct={ addProduct }
-          input={ input }
-          setInput={ setInput }
-        />
+          <FinalizarVenda
+            showSale={ showSale }
+            setShowSale={ setShowSale }
+            cashier={ cashier }
+            fullPrice={ fullPrice }
+            getTotal={ getTotal }
+          />
+
+          <button
+            style={ {
+              marginLeft: '30px',
+            } }
+            className="b1"
+            onClick={ () => setShowCustomers(true) }
+          >
+            {
+              choseCostumer
+                ? (
+                  <span>
+                    {' '}
+                    Cliente:
+                    {' '}
+                    {choseCostumer.nome}
+                    {' '}
+                    {choseCostumer.sobrenome}
+                  </span>
+                )
+                : (
+                  <p
+                    style={ {
+                      textDecoration: 'underline black',
+                      margin: '0' } }
+                  >
+                    Informar Cliente
+
+                  </p>
+                )
+            }
+          </button>
+
+          <ListaClientes
+            showCustomers={ showCustomers }
+            setShowCustomers={ setShowCustomers }
+            setChosenCostumer={ setChosenCostumer }
+          />
+        </div>
         <div className="right-elements">
           <h3 className="cashier-total-text">TOTAL</h3>
           <h3 className="cashier-total">{`R$ ${fullPrice}`}</h3>

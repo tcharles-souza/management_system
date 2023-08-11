@@ -90,7 +90,7 @@ input[type=number] {
 
 .td-quantidade {
   width: 150px;
-  text-align: right;
+  text-align: center;
 }
 
 .td-total {

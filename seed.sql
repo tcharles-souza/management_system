@@ -45,9 +45,35 @@ CREATE TABLE produtos (
   PRIMARY KEY (id)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE usuarios (
+  id INT NOT NULL AUTO_INCREMENT,
+  usuario VARCHAR(45) NOT NULL,
+  senha VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE vendas (
+  id_venda INT NOT NULL AUTO_INCREMENT,
+  data_venda DATETIME NOT NULL,
+  cliente VARCHAR(45) NULL,
+  vendedor VARCHAR(45) NULL,
+  total DECIMAL(10,2) NULL,
+  PRIMARY KEY (id_venda));
+
+CREATE TABLE venda_produto (
+  id_venda INT NOT NULL,
+  id_produto INT NOT NULL,
+  quantidade DECIMAL(10, 3) NOT NULL,
+  preco DECIMAL (10, 2) NOT NULL,
+  total DECIMAL(10,2) AS (quantidade * preco) NOT NULL,
+  PRIMARY KEY (id_venda, id_produto),
+  FOREIGN KEY (id_venda) REFERENCES vendas(id_venda),
+  FOREIGN KEY (id_produto) REFERENCES produtos(id)
+);
+
 INSERT INTO categorias (nome) 
 VALUES 
-	('Pães'), 
+	('Pães'),
 	('Bolos'), 
 	('Salgados');
 

@@ -8,6 +8,8 @@ const clientesRoute = require('./routes/clientes');
 const estoqueRoute = require('./routes/estoque');
 const categoriasRoute = require('./routes/categorias');
 const fornecedoresRoute = require('./routes/fornecedores');
+const registerRoute = require('./routes/register');
+const authentication = require('./routes/authentication');
 
 app.use(express.json());
 app.use(cors());
@@ -22,9 +24,11 @@ app.get('/', (_req, res) => {
   res.sendStatus(200);
 });
 
+app.use('/authentication', authentication);
 app.use('/clientes', clientesRoute);
 app.use('/estoque', estoqueRoute);
 app.use('/categorias', categoriasRoute);
 app.use('/fornecedores', fornecedoresRoute);
+app.use('/register', registerRoute);
 
 module.exports = app;

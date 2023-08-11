@@ -12,9 +12,7 @@ import { deleteCliente } from '../services/clientes_sv';
 function Clientes() {
   const [customers, setCustomers] = useState([]);
   const [showCadastro, setShowCadastro] = useState(false);
-
   const [showUpdate, setShowUpdate] = useState(false);
-
   const [costumerToUpdate, setCostumerToUpdate] = useState(null);
 
   const getCustomer = async () => {

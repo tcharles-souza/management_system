@@ -9,12 +9,13 @@ import Header from './components/Header';
 import Clientes from './pages/Clientes';
 import Estoque from './pages/Estoque';
 import Fornecedores from './pages/Fornecedores';
+import AppProvider from './context/AppProvider';
 
 function App() {
   const { pathname } = useLocation();
 
   return (
-    <>
+    <AppProvider>
       {pathname !== '/' && <Header />}
       <Routes>
         <Route path="/" element={ <Login /> } />
@@ -23,7 +24,7 @@ function App() {
         <Route path="/estoque" element={ <Estoque /> } />
         <Route path="/fornecedores" element={ <Fornecedores /> } />
       </Routes>
-    </>
+    </AppProvider>
   );
 }
 

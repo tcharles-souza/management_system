@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 import { insertProduct } from '../services/estoque_sv';
 import priceMask from '../../utils/price_mask';
+import { normalizeText } from '../../utils/normalize_text';
 
 const INITAL_STATE = {
   nome: '',
@@ -23,6 +24,7 @@ function CadastrarProduto({ ...props }) {
   const handleClose = () => setShowCadastro(false);
 
   const handleChange = ({ target: { value, name } }) => {
+    value = name === 'nome' ? normalizeText(value) : value;
     setData({
       ...data,
       [name]: value,

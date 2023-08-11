@@ -33,7 +33,7 @@
     margin-bottom: 15px;
   }
   
-  .form-control {
+  .form-control-login {
     width: 80%; /* Reduzindo a largura do form */
     max-width: 300px; /* Definindo uma largura máxima para o form */
     padding: 10px;

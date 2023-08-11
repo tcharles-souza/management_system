@@ -28,7 +28,6 @@ function ProdutosCaixa({ ...props }) {
       .filter(({ nome, id }) => nome.includes(input) || id.toString().includes(input))]);
   }, [products, input]);
 
-  //   console.log(filter);
   return (
     <>
       <Button variant="primary" onClick={ () => addProduct('') }>

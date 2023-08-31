@@ -1,47 +1,14 @@
 const express = require('express');
-const { selectAll,
-  insertCustomer,
-  deleteCustomer,
-  updateCustomer } = require('../models/clientes_sql');
+const { clientesController } = require('../controllers');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  try {
-    const [data] = await selectAll();
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+router.get('/', clientesController.getAll);
 
-router.post('/', async (req, res) => {
-  try {
-    await insertCustomer({ ...req.body });
-    res.sendStatus(200);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+router.post('/', clientesController.create);
 
-router.delete('/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    await deleteCustomer(Number(id));
-    res.sendStatus(204);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+router.delete('/:id', clientesController.remove);
 
-router.put('/', async (req, res) => {
-  const data = req.body;
-  try {
-    await updateCustomer(data);
-    res.sendStatus(201);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+router.put('/', clientesController.update);
 
 module.exports = router;

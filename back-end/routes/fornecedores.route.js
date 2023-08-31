@@ -1,55 +1,15 @@
 const express = require('express');
 
-const { 
-  selectAll, 
-  insertSupplier, 
-  deleteSupplier, 
-  updateSupplier,
- } = require('../models/fornecedores_sql');
+const { fornecedoresController } = require('../controllers');
 
 const router = express.Router();
 
-router.get('/', async (_req, res) => {
-  try {
-    const [data] = await selectAll();
-    res.status(201).json(data);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+router.get('/', fornecedoresController.getAll);
 
-router.post('/', async (req, res) => {
-  const data = req.body;
+router.post('/', fornecedoresController.create);
 
-  try {
-  await insertSupplier(data);
-  res.status(201).json(data);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+router.delete('/:id', fornecedoresController.remove);
 
-router.delete('/:id', async (req, res) => {
-  const { id } = req.params;
-
-  try {
-  await deleteSupplier(id);
-  res.sendStatus(204);
-} catch (error) {
-  res.status(500).json({ message: error.message });
-}
-});
-
-router.put('/:id', async (req, res) => {
-  const data = req.body;
-  const { id } = req.params;
-
-  try {
-    await updateSupplier(data, Number(id));
-    res.sendStatus(204);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+router.put('/:id', fornecedoresController.update);
 
 module.exports = router;

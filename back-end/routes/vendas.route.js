@@ -4,48 +4,15 @@ const route = express.Router();
 
 const formatSale = require('../controllers/formatSaleData');
 const formatSaleProduct = require('../controllers/formatSaleProduct');
-const { 
-    insertSale, 
-    insertProductSale, 
-    selectAllSales, 
-    selectSaleProduct } = require('../models/venda_sql');
 
-route.post('/', formatSale, async (req, res) => {
-try {
-   const [data] = await insertSale(req.body);
-   const { insertId } = data;
+const { vendasController } = require('../controllers');
 
-   res.status(201).json({ insertId });
-} catch (error) {
-    res.sendStatus(500);
-}
-});
+route.post('/', formatSale, vendasController.create);
 
-route.post('/:idVenda', formatSaleProduct, async (req, res) => {
-    const { idVenda } = req.params;
-    const data = req.body;
+route.post('/:idVenda', formatSaleProduct, vendasController.createSaleProduct);
 
-    await insertProductSale({ data, idVenda });
-    res.sendStatus(200);
-});
+route.get('/', vendasController.getAll);
 
-route.get('/', async (_req, res) => {
-  try {
-    const [data] = await selectAllSales();
-    res.status(200).json(data);    
-  } catch (error) {
-    res.sendStatus(500);
-  }
-});
-
-route.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const [data] = await selectSaleProduct(Number(id));
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+route.get('/:id', vendasController.getAllSaleProducts);
 
 module.exports = route;

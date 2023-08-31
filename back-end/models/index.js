@@ -3,7 +3,7 @@ const clientes = require('./clientes_sql');
 const estoque = require('./estoque_sql');
 const fornecedores = require('./fornecedores_sql');
 const usuarios = require('./usuarios_sql');
-const venda = require('./venda_sql');
+const vendas = require('./vendas_sql');
 
 module.exports = {
   categorias,
@@ -11,5 +11,5 @@ module.exports = {
   estoque,
   fornecedores,
   usuarios,
-  venda,
+  vendas,
 };

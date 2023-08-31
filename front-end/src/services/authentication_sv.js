@@ -5,7 +5,7 @@ export const userAuthentication = async (data) => {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
-      'Content-Type': 'application/json', // Definindo o Content-Type como JSON
+      'Content-Type': 'application/json',
     },
   });
 

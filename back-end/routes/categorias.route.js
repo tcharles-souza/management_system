@@ -1,16 +1,9 @@
 const express = require('express');
 
-const { selectAll } = require('../models/categorias_sql');
+const { categoriasController } = require('../controllers');
 
 const router = express.Router();
 
-router.get('/', async (_req, res) => {
-  try {
-    const [data] = await selectAll();
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+router.get('/', categoriasController.getAll);
 
 module.exports = router;

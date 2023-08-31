@@ -5,7 +5,7 @@ const {
   estoqueRoute, 
   categoriasRoute, 
   fornecedoresRoute,
-  registroRoute,
+  usuariosRoute,
   vendasRoute,
   autenticacaoRoute,
 } = require('./routes');
@@ -18,7 +18,7 @@ app.use('/clientes', clientesRoute);
 app.use('/estoque', estoqueRoute);
 app.use('/categorias', categoriasRoute);
 app.use('/fornecedores', fornecedoresRoute);
-app.use('/register', registroRoute);
+app.use('/register', usuariosRoute);
 app.use('/authentication', autenticacaoRoute);
 app.use('/vendas', vendasRoute);
 

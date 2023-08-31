@@ -14,18 +14,17 @@ const mapCashier = (arr) => {
   const idMap = {};
 
   arr.forEach((curr) => {
-      if (idMap[curr.id]) {
-        idMap[curr.id].quantidade = Number(idMap[curr.id].quantidade);
-        idMap[curr.id].quantidade += Number(curr.quantidade);
-      } else {
-        idMap[curr.id] = { ...curr,
-            quantidade: Number(curr.quantidade),
-            preco: Number(curr.preco),
-        };
-      }
-    });
-    
-    return Object.values(idMap);
+    if (idMap[curr.id]) {
+      idMap[curr.id].quantidade += Number(curr.quantidade);
+    } else {
+      idMap[curr.id] = { ...curr,
+          quantidade: Number(curr.quantidade),
+          preco: Number(curr.preco),
+      };
+    }
+  });
+
+  return Object.values(idMap);
 };
 
 module.exports = mapCashier;

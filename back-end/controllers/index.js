@@ -3,7 +3,7 @@ const categoriasController = require('./categorias.controller');
 const clientesController = require('./clientes.controller');
 const estoqueController = require('./estoque.controller');
 const fornecedoresController = require('./fornecedores.controller');
-const registroController = require('./registro.controller');
+const usuariosController = require('./usuarios.controller');
 const vendasController = require('./vendas.controller');
 
 module.exports = {
@@ -12,6 +12,6 @@ module.exports = {
   clientesController,
   estoqueController,
   fornecedoresController,
-  registroController,
+  usuariosController,
   vendasController,
 };

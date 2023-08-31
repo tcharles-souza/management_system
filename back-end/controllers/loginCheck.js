@@ -1,10 +1,10 @@
-const { selectAll } = require('../models/usuarios_sql');
+const { usuarios } = require('../models');
 
 const loginCheck = async (req, res) => {
   const { username, password } = req.body;
-  
+
   try {
-    const [users] = await selectAll();
+    const [users] = await usuarios.selectAll();
 
     const check = users.some((user) => user.usuario === username && user.senha === password);
 

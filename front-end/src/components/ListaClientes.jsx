@@ -52,7 +52,7 @@ function ListaClientes({ ...props }) {
           style={ { cursor: 'pointer' } }
         >
           {
-            customers.length && customers
+            !!customers.length && customers
               .filter(({ id, nome, sobrenome }) => `${nome
                 .toLowerCase()} ${sobrenome.toLowerCase()}`
                 .includes(filter.toLocaleLowerCase())

@@ -36,7 +36,7 @@ function FinalizarVenda({ ...props }) {
       <table className="table table-borderless">
         <thead>
           <tr>
-            <th scope="col">Nome</th>
+            <th scope="col">Descrição</th>
             <th scope="col">Quantidade</th>
             <th scope="col">Preço</th>
             <th scope="col">Total</th>
@@ -44,10 +44,10 @@ function FinalizarVenda({ ...props }) {
         </thead>
         <tbody>
           {
-            cashier.map(({ nome, quantidade, preco, id }, i) => (
+            cashier.map(({ descricao, quantidade, preco, id }, i) => (
 
               <tr key={ `${id}${i}` }>
-                <td>{nome}</td>
+                <td>{descricao}</td>
                 <td>{quantidade}</td>
                 <td>{preco}</td>
                 <td>{getTotal(quantidade, preco)}</td>

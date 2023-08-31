@@ -45,7 +45,7 @@ const selectSaleProduct = (id) => conn.execute(
     vp.quantidade,
     vp.total,
     p.preco,
-    p.nome
+    p.descricao
   FROM venda_produto vp
   INNER JOIN produtos p
   ON vp.id_produto = p.id

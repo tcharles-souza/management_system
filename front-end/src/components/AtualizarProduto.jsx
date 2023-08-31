@@ -6,7 +6,8 @@ import priceMask from '../../utils/price_mask';
 import { updateProduct } from '../services/estoque_sv';
 
 const INITAL_STATE = {
-  nome: '',
+  codigo_de_barras: null,
+  descricao: '',
   preco: '0000',
   estoque: 0,
   categoria: '',
@@ -56,7 +57,7 @@ function AtualizarProduto(props) {
           <label>
             Nome do Produto
             <input
-              name="nome"
+              name="descricao"
               onChange={ handleChange }
               type="text"
               value={ productToUpdate.nome }

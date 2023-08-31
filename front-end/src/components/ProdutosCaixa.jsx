@@ -42,20 +42,22 @@ function ProdutosCaixa({ ...props }) {
           <ListGroup>
             {
               products
-                .filter(({ nome, id }) => nome
-                  .includes(input) || id.toString().includes(input))
+                .filter(({ descricao, id, codigo_de_barras: barCode }) => descricao
+                  .includes(input)
+                  || id.toString().includes(input)
+                  || barCode.includes(input))
                 .map((p, i) => (
                   <ListGroup.Item
                     className="search-list"
                     style={ { cursor: 'pointer' } }
-                    key={ i + p.nome }
+                    key={ i + p.descricao }
                     onClick={ () => {
-                      addProduct(p.nome);
+                      addProduct(p.descricao);
                       setInput('');
                       handleClose();
                     } }
                   >
-                    <span>{p.nome}</span>
+                    <span>{p.descricao}</span>
 
                     <span>{`   CÓD: ${p.id}`}</span>
                   </ListGroup.Item>

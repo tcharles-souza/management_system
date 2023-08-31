@@ -50,7 +50,8 @@ function Estoque() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Produto</th>
+            <th>Cód. Barras</th>
+            <th>Descrição</th>
             <th>Preço</th>
             <th>Categoria</th>
             <th>Estoque Atual</th>
@@ -64,7 +65,8 @@ function Estoque() {
             data.estoque.map((el) => (
               <tr key={ el.id }>
                 <td>{el.id}</td>
-                <td>{el.nome}</td>
+                <td>{el.codigo_de_barras}</td>
+                <td>{el.descricao}</td>
                 <td>{`R$ ${el.preco || 0}`}</td>
                 <td>{el.categoria}</td>
                 <td>{el.estoque}</td>

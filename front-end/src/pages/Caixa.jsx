@@ -6,6 +6,8 @@ import { normalizeText } from '../../utils/normalize_text';
 import trash from '../images/trash-2.svg';
 import FinalizarVenda from '../components/FinalizarVenda';
 import ListaClientes from '../components/ListaClientes';
+import { getQuantity } from '../../utils/getTagInfo';
+import { isScaleProduct } from '../../utils/isScaleProduct';
 
 function Caixa() {
   const [products, setProducts] = useState([]);
@@ -23,15 +25,27 @@ function Caixa() {
 
     setProducts([...data]);
   };
-
   const addProduct = (value) => {
     const search = products
-      .filter((p) => p.nome.includes(value) || p.id.toString().includes(value));
+      .filter((p) => {
+        const scaleCodeAndProduct = isScaleProduct(value, p.balanca);
+        if (scaleCodeAndProduct) {
+          // eslint-disable-next-line no-magic-numbers
+          const barCode = value.slice(1, 5);
+          return Number(p.codigo_de_barras) === Number(barCode);
+        }
+
+        return p.descricao.includes(value)
+      || p.id.toString().includes(value)
+      || p.codigo_de_barras.includes(value);
+      });
 
     if (search.length === 1) {
-      search[0].quantidade = '1';
+      const { balanca, preco } = search[0];
 
-      setCashier([...cashier, ...search]);
+      const quantidade = isScaleProduct(value, balanca) ? getQuantity(value, preco) : '1';
+
+      setCashier([...cashier, { ...search[0], quantidade }]);
       setInput('');
       return;
     }
@@ -48,15 +62,11 @@ function Caixa() {
   };
 
   const valueChange = ({ target: { value } }, i) => {
-    value = value.replace(/[+-]/g, '');
-
-    const convert = Number(value);
-
     const { estoque } = cashier[i];
 
-    const num = estoque < convert ? estoque : convert;
+    const quantidade = estoque < value ? estoque : value;
 
-    cashier[i] = { ...cashier[i], quantidade: num.toString() };
+    cashier[i] = { ...cashier[i], quantidade };
 
     setCashier([...cashier]);
   };
@@ -111,6 +121,7 @@ function Caixa() {
         <thead>
           <tr>
             <th className="td-cod" scope="col">Cód</th>
+            <th className="td-cod" scope="col">Cód. Barras</th>
             <th className="td-produto" scope="col">Produto</th>
             <th className="td-preco" scope="col">Preço</th>
             <th className="td-quantidade" scope="col">Quantidade</th>
@@ -121,10 +132,17 @@ function Caixa() {
         <tbody>
           {
             cashier
-              .map(({ nome, id, preco, quantidade }, i) => (
-                <tr key={ `${id}${nome}${i}` }>
-                  <th scope="row" className="td-cod">{id}</th>
-                  <td className="td-produto">{nome}</td>
+              .map(({
+                descricao,
+                id,
+                preco,
+                quantidade,
+                codigo_de_barras: barCode,
+              }, i) => (
+                <tr key={ `${id}${i}` }>
+                  <td className="td-cod">{id}</td>
+                  <td className="td-cod">{barCode}</td>
+                  <td className="td-produto">{descricao}</td>
                   <td className="td-preco">{`R$ ${preco}`}</td>
                   <td className="td-quantidade">
                     <Form.Control
@@ -224,10 +242,8 @@ function Caixa() {
           <h3 className="cashier-total-text">TOTAL</h3>
           <h3 className="cashier-total">{`R$ ${fullPrice}`}</h3>
         </div>
-
       </footer>
     </div>
   );
 }
-
 export default Caixa;

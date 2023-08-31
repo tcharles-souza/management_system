@@ -34,12 +34,14 @@ CREATE TABLE categorias (
 
 CREATE TABLE produtos (
   id INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(45) NULL,
+  codigo_de_barras VARCHAR(45) NULL UNIQUE,
+  descricao VARCHAR(45) NULL,
   preco DECIMAL(10, 2) NULL,
   categoria_id INT NULL,
   fornecedor_id INT NULL,
   estoque INT NOT NULL,
-  unidade ENUM('CX', 'UN', 'OTHER') NOT NULL,
+  unidade ENUM('CX', 'UN',  'KG', 'OTHER') NOT NULL,
+  balanca BOOLEAN NOT NULL DEFAULT false, 
   FOREIGN KEY (fornecedor_id) REFERENCES fornecedores(id),
   FOREIGN KEY (categoria_id) REFERENCES categorias(id),
   PRIMARY KEY (id)
@@ -103,25 +105,26 @@ VALUES
     ('Fornecedor I', 'Empresa I Ltda.', '90.123.456/0001-90', 'fornecedorI@example.com', '(99) 9999-9999'),
     ('Fornecedor J', 'Comércio J S/A', '01.234.567/0001-01', 'fornecedorJ@example.com', '(10) 1010-1010');
 
-INSERT INTO produtos (nome, preco, categoria_id, fornecedor_id, estoque, unidade)
+INSERT INTO produtos (codigo_de_barras, descricao, preco, categoria_id, fornecedor_id, estoque, unidade)
 VALUES
-    ('PAO FRANCES', 10, 1, 1, 20, 'UN'),
-    ('PAO INTEGRAL', 10, 1, 1, 20, 'UN'),
-    ('PAO DE FORMA', 10, 1, 2, 20, 'UN'),
-    ('BROA DE MILHO', 10, 1, 2, 20, 'UN'),
-    ('BOLO DE CHOCOLATE', 10, 2, 3, 20, 'UN'),
-    ('BOLO DE CENOURA', 10, 2, 3, 20, 'UN'),
-    ('CROISSANT', 10, 1, 4, 20, 'UN'),
-    ('ROSQUINHA', 10, 2, 4, 20, 'UN'),
-    ('BISCOITO DE AVEIA', 10, 2, 5, 20, 'UN'),
-    ('BISCOITO DE CHOCOLATE', 10, 2, 5, 20, 'UN'),
-    ('BOLO DE FUBA', 10, 2, 6, 20, 'UN'),
-    ('PAO DE QUEIJO', 10, 3, 6, 20, 'UN'),
-    ('SONHO', 10, 2, 7, 20, 'UN'),
-    ('BOLACHA DE AGUA E SAL', 10, 2, 7, 20, 'UN'),
-    ('COXINHA', 10, 3, 8, 20, 'UN'),
-    ('EMPADA DE FRANGO', 10, 3, 8, 20, 'UN'),
-    ('BOLO DE BANANA', 10, 2, 9, 20, 'UN'),
-    ('PAO DE BATATA', 10, 1, 9, 20, 'UN'),
-    ('BISCOITO AMANTEIGADO', 10, 2, 10, 20, 'UN'),
-    ('BOLO DE MACA', 10, 2, 10, 20, 'UN');
+    ('7890123456789', 'PAO FRANCES', 10, 1, 1, 100, 'UN'),
+    ('7890123456790', 'PAO INTEGRAL', 10, 1, 1, 100, 'UN'),
+    ('7890123456791', 'PAO DE FORMA', 10, 1, 2, 100, 'UN'),
+    ('7890123456792', 'BROA DE MILHO', 10, 2, 2, 100, 'UN'),
+    ('7890123456793', 'BOLO DE CHOCOLATE', 10, 2, 3, 100, 'UN'),
+    ('7890123456794', 'BOLO DE CENOURA', 10, 2, 3, 100, 'UN'),
+    ('7890123456795', 'CROISSANT', 10, 3, 4, 100, 'UN'),
+    ('7890123456796', 'ROSQUINHA', 10, 3, 4, 100, 'UN'),
+    ('7890123456797', 'BISCOITO DE AVEIA', 10, 3, 5, 100, 'UN'),
+    ('7890123456798', 'BISCOITO DE CHOCOLATE', 10, 3, 5, 100, 'UN'),
+    ('7890123456799', 'BOLO DE FUBA', 10, 2, 6, 100, 'UN'),
+    ('7890123456800', 'PAO DE QUEIJO', 10, 1, 6, 100, 'UN'),
+    ('7890123456801', 'SONHO', 10, 1, 7, 100, 'UN'),
+    ('7890123456802', 'BOLACHA DE AGUA E SAL', 10, 2, 7, 100, 'UN'),
+    ('7890123456803', 'COXINHA', 10, 3, 8, 10, 'UN'),
+    ('7890123456804', 'EMPADA DE FRANGO', 10, 3, 8, 100, 'UN'),
+    ('7890123456805', 'BOLO DE BANANA', 10, 2, 9, 100, 'UN'),
+    ('7890123456806', 'PAO DE BATATA', 10, 1, 9, 100, 'UN'),
+    ('7890123456807', 'BISCOITO AMANTEIGADO', 10, 3, 10, 100, 'UN'),
+    ('7890123456808', 'BOLO DE MACA', 10, 2, 10, 100, 'UN');
+

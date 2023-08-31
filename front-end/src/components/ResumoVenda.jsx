@@ -28,11 +28,16 @@ function ResumoVenda({ ...props }) {
         </thead>
         <tbody>
           {
-            chosenSale.map(({ id_produto: id, nome, quantidade, preco, total }, i) => (
-
+            chosenSale.map(({
+              id_produto: id,
+              descricao,
+              quantidade,
+              preco,
+              total,
+            }, i) => (
               <tr key={ `${id}${i}` }>
                 <td>{id}</td>
-                <td>{nome}</td>
+                <td>{descricao}</td>
                 <td>{preco}</td>
                 <td>{quantidade}</td>
                 <td>
@@ -73,7 +78,7 @@ ResumoVenda.propTypes = {
     PropTypes.shape({
       id_produto: PropTypes.number,
       id_venda: PropTypes.number,
-      nome: PropTypes.string,
+      descricao: PropTypes.string,
       quantidade: PropTypes.number,
       preco: PropTypes.string,
       total: PropTypes.string,

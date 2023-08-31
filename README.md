@@ -8,3 +8,9 @@
 
 REACT + VITE + DOCKER
 https://dev.to/ysmnikhil/how-to-build-with-react-or-vue-with-vite-and-docker-1a3l
+
+CÓDIGO EAN13-BALANÇA
+> 2 0000 0 000000 0
+> 2 CCCC 0 TTTTTT DV
+
+2010000026905

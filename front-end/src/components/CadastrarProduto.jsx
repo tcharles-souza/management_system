@@ -9,12 +9,14 @@ import priceMask from '../../utils/price_mask';
 import { normalizeText } from '../../utils/normalize_text';
 
 const INITAL_STATE = {
-  nome: '',
+  codigo_de_barras: null,
+  descricao: '',
   preco: '0000',
   estoque: 0,
   categoria_id: 1,
   fornecedor_id: 1,
   unidade: 'UN',
+  balanca: false,
 };
 
 function CadastrarProduto({ ...props }) {
@@ -24,7 +26,7 @@ function CadastrarProduto({ ...props }) {
   const handleClose = () => setShowCadastro(false);
 
   const handleChange = ({ target: { value, name } }) => {
-    value = name === 'nome' ? normalizeText(value) : value;
+    value = name === 'descricao' ? normalizeText(value) : value;
     setData({
       ...data,
       [name]: value,
@@ -36,6 +38,13 @@ function CadastrarProduto({ ...props }) {
     handleClose();
     setData({ ...INITAL_STATE });
     getEstoque();
+  };
+
+  const toggleChange = ({ target: { name } }) => {
+    setData({
+      ...data,
+      [name]: !data[name],
+    });
   };
 
   const valueChange = ({ target: { value, name } }) => {
@@ -52,14 +61,23 @@ function CadastrarProduto({ ...props }) {
       </Modal.Header>
       <Modal.Body>
         <label>
-          Nome do Produto
+          Descrição
           <input
-            name="nome"
+            name="descricao"
             onChange={ handleChange }
             type="text"
           />
         </label>
-
+        <label>
+          Cód Barras / Balança
+          <input
+            name="codigo_de_barras"
+            onChange={ valueChange }
+            maxLength={ 13 }
+            value={ data.codigo_de_barras }
+            type="text"
+          />
+        </label>
         Preço
         <input
           type="text"
@@ -98,6 +116,7 @@ function CadastrarProduto({ ...props }) {
           >
             <option value="UN">UN</option>
             <option value="CX">CX</option>
+            <option value="KG">KG</option>
             <option value="OTHER">OTHER</option>
           </select>
         </label>
@@ -114,6 +133,15 @@ function CadastrarProduto({ ...props }) {
                 {f.nome}
               </option>)) }
           </select>
+        </label>
+        <label style={ { display: 'flex' } }>
+          <input
+            type="checkbox"
+            name="balanca"
+            checked={ data.balanca }
+            onChange={ toggleChange }
+          />
+          Produto de balança
         </label>
       </Modal.Body>
       <Modal.Footer>

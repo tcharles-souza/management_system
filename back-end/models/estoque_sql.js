@@ -3,10 +3,12 @@ const conn = require('../config/connection');
 const selectAll = () => conn.execute(
   `SELECT
   p.id,
-  p.nome,
+  p.codigo_de_barras,
+  p.descricao,
   p.preco,
   p.unidade,
   p.estoque,
+  p.balanca,
   c.nome categoria,
   f.nome fornecedor
 FROM PadariaDB.produtos p
@@ -20,9 +22,19 @@ ORDER BY p.id`,
 );
 
 const insertProduct = (data) => conn.execute(
-  `INSERT INTO produtos (nome, preco, categoria_id, fornecedor_id, estoque, unidade)
-  VALUES (?, ?, ?, ?, ?, ?)`,
-  [data.nome, data.preco, data.categoria_id, data.fornecedor_id, data.estoque, data.unidade],
+  `INSERT INTO produtos 
+  (codigo_de_barras, descricao, preco, estoque, categoria_id, fornecedor_id, unidade, balanca)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+  [
+    data.codigo_de_barras, 
+    data.descricao, 
+    data.preco, 
+    data.estoque, 
+    data.categoria_id, 
+    data.fornecedor_id, 
+    data.unidade,
+    data.balanca,
+  ],
 );
 
 const deleteProduct = (id) => conn.execute(
@@ -31,14 +43,23 @@ const deleteProduct = (id) => conn.execute(
 );
 
 const updateProduct = (data) => conn.execute(
-  `UPDATE produtos SET 
-  nome = ?, 
+  `UPDATE produtos SET
+  codigo_de_barras,
+  descricao = ?, 
   preco = ?, 
   categoria_id = ?, 
   fornecedor_id = ?, 
   estoque = ?, 
   unidade = ? WHERE (id = ?)`,
-  [data.nome, data.preco, data.categoria, data.fornecedor, data.estoque, data.unidade, data.id],
+  [
+    data.codigo_de_barras,
+    data.descricao, 
+    data.preco, 
+    data.categoria, 
+    data.fornecedor, 
+    data.estoque, 
+    data.unidade, 
+    data.id],
 );
 module.exports = {
   selectAll,
